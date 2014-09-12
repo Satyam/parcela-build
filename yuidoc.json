@@ -9,7 +9,7 @@
         "selleck": "false",
         "ignorePaths": [ "tests" ,"node_modules","coverage"],
         "paths": "src/**",
-        "outdir": "./api",
+        "outdir": "./src/parcela.github.io/api",
 		"tabtospace":4
     }
 }
