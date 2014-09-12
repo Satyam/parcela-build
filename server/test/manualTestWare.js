@@ -11,21 +11,20 @@ var list = function (req, res) {
 	var testFiles = {};
 	FS.listTree(SRC, function (filePath, stat) {
 		if (stat.isDirectory())  {
+			if (filePath === SRC) return false;
 			if (path.basename(filePath) === 'node_modules') return null;
 			return false;
 		}
 		var parts = filePath.split('/'),
 			t = parts.indexOf('tests');
-		if (t) {
-			if (parts[t + 1] == 'manual') {
-				var module = parts[t - 1],
-					file = parts[t + 2];
-				if (!testFiles[module]) {
-					testFiles[module] = [];
-				}
-				testFiles[module].push(file);
-				return true;
+		if (t > -1) {
+			var module = parts[t - 1],
+				file = parts[t + 1];
+			if (!testFiles[module]) {
+				testFiles[module] = [];
 			}
+			testFiles[module].push(file);
+			return true;
 		}
 		return false;
 	}).then(function (files) {
@@ -75,11 +74,11 @@ var test = function (req, res, next) {
 			return;
 		}
 
-		resolve(path.join(SRC, m, 'tests/manual', t));
+		resolve(path.join(SRC, m, 'tests', t));
 
 	} else {
-		console.log('sending:', path.resolve(process.cwd(), path.join(SRC, m, 'tests/manual', t)));
-		res.sendfile(path.resolve(process.cwd(), path.join(SRC, m, 'tests/manual', t)));
+		console.log('sending:', path.resolve(process.cwd(), path.join(SRC, m, 'tests', t)));
+		res.sendfile(path.resolve(process.cwd(), path.join(SRC, m, 'tests', t)));
 	}
 };
 
