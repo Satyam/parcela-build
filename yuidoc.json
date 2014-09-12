@@ -4,10 +4,10 @@
     "version": "0.0.1",
     "url": "https://github.com/Parcela",
     "options": {
-        "linkNatives": "false",        
+        "linkNatives": "false",
         "attributesEmit": "false",
         "selleck": "false",
-        "ignorePaths": [ "tests" ,"node_modules","coverage"],
+        "ignorePaths": [ "tests" ,"node_modules", "coverage", "site-preview", "src/parcela.github.io"],
         "paths": "src/**",
         "outdir": "./src/parcela.github.io/api",
 		"tabtospace":4
