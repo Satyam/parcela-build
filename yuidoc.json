@@ -7,9 +7,9 @@
         "linkNatives": "false",
         "attributesEmit": "false",
         "selleck": "false",
-        "ignorePaths": [ "tests" ,"node_modules", "coverage", "site-preview", "src/parcela.github.io"],
+        "ignorePaths": [ "tests" ,"node_modules", "coverage", "site-preview", "site"],
         "paths": "src/**",
-        "outdir": "./src/parcela.github.io/api",
+        "outdir": "./site/api",
 		"tabtospace":4
     }
 }

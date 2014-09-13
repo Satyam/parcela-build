@@ -11,7 +11,7 @@ github_username:  Parcela
 highlighter: rouge
 markdown: redcarpet
 permalink: pretty
-source: ./src/parcela.github.io
+source: ./site
 destination: ./site-preview
 
 redcarpet:
