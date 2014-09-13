@@ -1,5 +1,9 @@
 git pull origin master
-cd ./src/event
+cd site
+git pull origin master
+cd ../src/parcela
+git pull origin master
+cd ../event
 git pull origin master
 cd ../event-dom
 git pull origin master
