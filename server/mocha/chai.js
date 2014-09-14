@@ -1,1 +1,1 @@
-/home/satyam/itsa/node_modules/chai/chai.js
+../../node_modules/chai/chai.js

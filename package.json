@@ -17,7 +17,8 @@
     "uglify-js": "^2.4.15",
     "useragent": "^2.0.9",
     "semver": "^3.0.1",
-    "xmldom": "^0.1.19"
+    "xmldom": "^0.1.19",
+    "tsort": "^0.0.1"
   },
   "dependencies": {
     "ypromise": "^0.2.3",
