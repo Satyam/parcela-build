@@ -11,14 +11,13 @@ var list = function (req, res) {
 	var testFiles = {};
 	FS.listTree(SRC, function (filePath, stat) {
 		if (stat.isDirectory())  {
-			if (filePath === SRC) return false;
 			if (path.basename(filePath) === 'node_modules') return null;
 			return false;
 		}
 		var parts = filePath.split('/'),
 			t = parts.indexOf('tests');
-		if (t > -1) {
-			var module = parts[t - 1],
+		if (t !== -1) {
+			var module = parts[t-1],
 				file = parts[t + 1];
 			if (!testFiles[module]) {
 				testFiles[module] = [];
@@ -58,7 +57,7 @@ var test = function (req, res, next) {
 		} else {
 			brw.require(module);
 		}
-				
+
 		brw.bundle().pipe(res);
 	};
 
