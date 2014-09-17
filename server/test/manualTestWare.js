@@ -57,6 +57,7 @@ var test = function (req, res, next) {
 		} else {
 			brw.require(module);
 		}
+		brw.exclude('jsdom');
 
 		brw.bundle().pipe(res);
 	};
