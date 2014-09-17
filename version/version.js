@@ -40,28 +40,28 @@ var SUBREGEX = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g,
     	}) : s;
 	};
 
-/*
-var ghget = function(template, data) {
-	console.log(sub(template, data));
-	return HTTP.read({
-		auth: "satyam:rgb0310-G",
-		ssl:true,
-		headers: {
-			accept: 'application/vnd.github.v3+json',
-			'user-agent':'satyam@satyam.com.ar'
-		},
-		hostname: "api.github.com",
-		method: "GET",
-		path: sub(template, data),
-		port: 443
-	}).then(function (resp) {
-		return JSON.parse(resp.toString());
-	});
-};
-var qq = function () {
+var version = process.argv[2];
+if (version === '-r') {
+	var ghget = function(template, data) {
+		console.log(sub(template, data));
+		return HTTP.read({
+//			auth: "",
+			ssl:true,
+			headers: {
+				accept: 'application/vnd.github.v3+json',
+				'user-agent':'satyam@satyam.com.ar'
+			},
+			hostname: "api.github.com",
+			method: "GET",
+			path: sub(template, data),
+			port: 443
+		}).then(function (resp) {
+			return JSON.parse(resp.toString());
+		});
+	};
 	return ghget('/orgs/{org}/repos',{org:'Parcela'})
 	.then(function (repos) {
-		return FS.write('repos.json', JSON.stringify(repos.map(function (repo) {
+		return void console.log(JSON.stringify(repos.map(function (repo) {
 			return {
 				id: repo.id,
 				name: repo.name,
@@ -70,9 +70,10 @@ var qq = function () {
 			};
 		}), null, 4));
 	});
-};
-*/
-var version = process.argv[2];
+	process.exit(0);
+}
+
+	
 
 if (! /^\d+\.\d+\.\d+$/.test(version)) {
 	console.log('Usage');
@@ -136,7 +137,7 @@ var editPackageJson = function (repo) {
 		})
 		.fail(function (err) {
 			errors.push('Processing of repo ' + repo.name + ' ended in error: ' + err);
-			return 'error at repo ' + repo.name +  ' error: ' err;
+			return 'error at repo ' + repo.name +  ' error: ' + err;
 		});
 	});
 		
@@ -163,7 +164,7 @@ var editDocVersion = function (repo) {
 	})
 	.fail(function (err) {
 		errors.push('Processing of repo ' + repo.name + ' ended in error: ' + err);
-		return 'error at repo ' + repo.name +  ' error: ' err;
+		return 'error at repo ' + repo.name +  ' error: '  + err;
 	});
 
 };
