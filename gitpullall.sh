@@ -7,7 +7,7 @@ cd ../event
 git pull origin master
 cd ../event-dom
 git pull origin master
-cd ../event-hammerjs
+cd ../event-mobile
 git pull origin master
 cd ../fake-dom
 git pull origin master

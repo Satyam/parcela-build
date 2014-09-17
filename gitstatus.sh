@@ -12,7 +12,7 @@ git status
 cd ../event-dom
 pwd
 git status
-cd ../event-hammerjs
+cd ../event-mobile
 pwd
 git status
 cd ../fake-dom
