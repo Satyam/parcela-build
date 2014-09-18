@@ -18,7 +18,8 @@
     "useragent": "^2.0.9",
     "semver": "^3.0.1",
     "xmldom": "^0.1.19",
-    "tsort": "^0.0.1"
+    "tsort": "^0.0.1",
+    "jsdom": "1.0.0-pre.6"
   },
   "dependencies": {
     "ypromise": "^0.2.3",
