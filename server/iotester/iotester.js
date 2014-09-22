@@ -56,21 +56,30 @@ var sendText = function (req, res) {
 };
 
 var stream = function (req, res) {
+    var block2k = '',
+        i;
+    // Very interesting issue where we must take care with:
+    // XDomainRequest only fires the `onprogress`-event when the block of code exceeds 2k !
+    // see: http://blogs.msdn.com/b/ieinternals/archive/2010/04/06/comet-streaming-in-internet-explorer-with-xmlhttprequest-and-xdomainrequest.aspx
+    // Thus, we prepend the response with 2k of whitespace
+    for (i=0; i<2000; i++) {
+        block2k += ' ';
+    }
     res.set({
           'access-control-allow-origin': '*',
           'Content-Type': 'text/plain'
-        })
+        });
     for (var i=1; i<4; i++) {
         setTimeout((function(j) {
             return function() {
-                res.write(new Buffer('package '+j));
+                res.write(new Buffer(block2k+'package '+j));
             }
         })(i),
-        i*400);
+        i*300);
     }
     setTimeout(function() {
-        res.end('package 4');
-    }, 1500);
+        res.end(block2k+'package 4');
+    }, 1200);
 
     // res.set({'Content-Type': 'text/plain'})
        // .status(200)
