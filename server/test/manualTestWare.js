@@ -35,7 +35,7 @@ var list = function (req, res) {
 			}).join('\n') + '</ul>';
 		}
 
-		console.log('listing test files', testFiles);
+		// console.log('listing test files', testFiles);
 
 		res.send(html);
 	});
@@ -43,12 +43,12 @@ var list = function (req, res) {
 
 
 var test = function (req, res, next) {
-	console.log('test:', req.params, req.query);
+	// console.log('test:', req.params, req.query);
 	var m = req.params.module,
 		t = req.params.test;
 
 	var resolve = function (module) {
-		console.log('Resolving requires in ', module);
+		// console.log('Resolving requires in ', module);
 
 		res.setHeader('content-type', 'application/javascript');
 		var brw = browserify();
@@ -67,7 +67,7 @@ var test = function (req, res, next) {
 		resolve(m);
 	} else if (path.extname(t) === '.js') {
 		if (req.query.js !== 'ok') {
-			console.log('sending stub instead');
+			// console.log('sending stub instead');
 			FS.read('test/stub.html').then(function (content) {
 				res.send(content.replace('{test}',req.path).replace('{title}', m + ' - ' + t));
 			});
@@ -77,7 +77,7 @@ var test = function (req, res, next) {
 		resolve(path.join(SRC, m, 'tests', t));
 
 	} else {
-		console.log('sending:', path.resolve(process.cwd(), path.join(SRC, m, 'tests', t)));
+		// console.log('sending:', path.resolve(process.cwd(), path.join(SRC, m, 'tests', t)));
 		res.sendfile(path.resolve(process.cwd(), path.join(SRC, m, 'tests', t)));
 	}
 };

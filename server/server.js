@@ -6,14 +6,13 @@ var express = require('express'),
     DATEPATTERN = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/,
     REVIVER = function(key, value) {
         return DATEPATTERN.test(value) ? new Date(value) : value;
-    };
+    },
+    BASEDIR = '/var/www/vhosts/server.parcela.io/server';
 
 var app = express();
 
-app.use(function (req, res, next) {
-	console.log('\n',req.method, req.path);
-	next();
-});
+// process.chdir(BASEDIR);
+process.title = 'parcela-server';
 
 // parse application/x-www-form-urlencoded for IE using cors
 // cors-ie cannot recieve a content-type: so it is unaware of the contentype and will not parse the right way
@@ -31,6 +30,11 @@ app.use(function (req, res, next) {
 // parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.text());
+
+// app.use(function (req, res, next) {
+    // console.log('\n',req.method, req.path);
+    // next();
+// });
 
 // serves up all your javascript files, handling all require() calls
 // The module needs to receive a reference to the express server instance
@@ -50,5 +54,5 @@ app.get('*', function (req, res) {
 app.set('port', process.env.PORT || 8000);
 
 app.listen(app.get('port'), function(){
-    console.log("Express server listening on port " + app.get('port'));
+    // console.log("Express server listening on port " + app.get('port'));
 });
